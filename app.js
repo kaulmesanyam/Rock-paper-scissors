@@ -21,28 +21,38 @@ function convertToWord(letter) {
 }
 
 function win(user, comp){
+	const smallUserName = "user".fontsize(3).sub();
+	const smallCompName = "comp".fontsize(3).sub();
+	const clickedIcon= document.getElementById(user);
 	userScore++;
 	userScore_span.innerHTML = userScore;
 	compScore_span.innerHTML = compScore;
-	const smallUserName = "user".fontsize(3).sub();
-	const smallCompName = "comp".fontsize(3).sub();
 	result_div.innerHTML = `${convertToWord(user)}${smallUserName} beats ${convertToWord(comp)}${smallCompName}. You win!`; 
+	clickedIcon.classList.add('green-glow');
+	setTimeout(function() {clickedIcon.classList.remove('green-glow') }, 300);
+
 }
 
+
 function loose(user, comp){
+	const smallUserName = "user".fontsize(3).sub();
+	const smallCompName = "comp".fontsize(3).sub();
+	const clickedIcon= document.getElementById(user);
 	compScore++;
 	userScore_span.innerHTML = userScore;
 	compScore_span.innerHTML = compScore;
-	const smallUserName = "user".fontsize(3).sub();
-	const smallCompName = "comp".fontsize(3).sub();
 	result_div.innerHTML = `${convertToWord(user)}${smallUserName} looses to ${convertToWord(comp)}${smallCompName}. You lost...`; 
-
+	clickedIcon.classList.add('red-glow');
+	setTimeout(() => clickedIcon.classList.remove('red-glow') , 300);
 }
 
 function draw(user, comp){
+	const clickedIcon= document.getElementById(user);
 	const smallUserName = "user".fontsize(3).sub();
 	const smallCompName = "comp".fontsize(3).sub();
 	result_div.innerHTML = `${convertToWord(user)}${smallUserName} equals ${convertToWord(comp)}${smallCompName}. It's a draw...`; 
+	clickedIcon.classList.add('grey-glow');
+	setTimeout(function() {clickedIcon.classList.remove('grey-glow') }, 300);
 }
 
 function game(userChoice) {
@@ -67,9 +77,7 @@ function game(userChoice) {
 
 
 function main() {
-	rock_div.addEventListener('click', function(){
-		game("r");
-	})
+	rock_div.addEventListener('click', () => game("r"));
 
 	paper_div.addEventListener('click', function(){
 		game("p");
